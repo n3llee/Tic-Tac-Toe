@@ -14,14 +14,14 @@ NSString* player_moves(NSString *player_name);
 NSMutableArray* processing_move(NSString *user_moves);
 //NSString* asking_again(NSString *player_name, NSString *user_moves);
 BOOL is_player_winning(NSArray *player_data, NSString *player_name);
-//void print_table(NSMutableDictionary *table_score, NSString *icon, NSString *player_moves);
+void print_table(NSMutableDictionary *table_score, NSString *icon, NSString *player_moves);
 
 
 int main(int argc, const char * argv[]) {
     @autoreleasepool {
         
-//        NSDictionary *default_table = @{@"A":@"A",@"B":@"B",@"C":@"C",@"D":@"D",@"E":@"E",@"F":@"F",@"G":@"G",@"H":@"H",@"I":@"I"};
-//        NSMutableDictionary *table_score = [NSMutableDictionary dictionaryWithDictionary:default_table];
+        NSDictionary *default_table = @{@"A":@"A",@"B":@"B",@"C":@"C",@"D":@"D",@"E":@"E",@"F":@"F",@"G":@"G",@"H":@"H",@"I":@"I"};
+        NSMutableDictionary *table_score = [NSMutableDictionary dictionaryWithDictionary:default_table];
         
 
         
@@ -53,10 +53,10 @@ int main(int argc, const char * argv[]) {
             NSLog(@"%hhd", win_lose_status);
             // player 1
             NSString *player1_moves = player_moves(player1_name);
-            NSString * player1_data = [player1_moves stringByReplacingOccurrencesOfString:@"\n" withString:@""];
+            NSString *player1_data = [player1_moves stringByReplacingOccurrencesOfString:@"\n" withString:@""];
             [store_player1_data addObject:player1_data];
             NSLog(@"%@",store_player1_data);
-//            print_table(table_score, @"O", player1_data);
+            print_table(table_score, @"O", player1_data);
             win_lose_status = is_player_winning(store_player1_data, player1_name);
             
             if(win_lose_status) break;
@@ -66,7 +66,7 @@ int main(int argc, const char * argv[]) {
             NSString *player2_data = [player2_moves stringByReplacingOccurrencesOfString:@"\n" withString:@""];
             [store_player2_data addObject:player2_data];
             NSLog(@"%@",store_player2_data);
-//            print_table(table_score, @"X", player2_data);
+            print_table(table_score, @"X", player2_data);
             win_lose_status = is_player_winning(store_player2_data, player2_name);
             
             if(win_lose_status) break;
@@ -135,11 +135,14 @@ BOOL is_player_winning(NSArray *player_data, NSString *player_name)
     return is_winning;
 }
 
-//void print_table(NSMutableDictionary *table_score, NSString *icon, NSString *player_moves)
-//{
-//    [table_score setObject:icon forKey:player_moves];
-//    NSLog();
-//}
+void print_table(NSMutableDictionary *table_score, NSString *icon, NSString *player_moves)
+{
+    [table_score setObject:icon forKey:player_moves];
+    NSLog(@"\n-------------\n| %@ | %@ | %@ |\n-------------\n| %@ | %@ | %@ |\n-------------\n| %@ | %@ | %@ |\n-------------\n",
+          table_score[@"A"],table_score[@"B"],table_score[@"C"],table_score[@"D"],table_score[@"E"],table_score[@"F"],
+          table_score[@"G"],table_score[@"H"],table_score[@"I"]);
+    
+}
 
 //NSNumber* is_accepted_move(NSString *moves)
 //{
